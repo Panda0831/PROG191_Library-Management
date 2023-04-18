@@ -34,6 +34,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import controller.BookManagementController;
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.SwingConstants;
 
 public class BookManagementView extends JFrame {
@@ -82,10 +85,16 @@ public class BookManagementView extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
          public void run() {
-				try {
-					BookManagementView frame = new BookManagementView();
-					frame.setVisible(true);
-				} catch (Exception e) {
+                    BookManagementView frame = new BookManagementView();
+                    try {
+			Image image = ImageIO.read(new File("appicon.png"));
+                        frame.setIconImage(image);
+			frame.setVisible(true);
+                    }
+                    catch (IOException e){
+                    frame.setIconImage(null);
+                    }
+                    catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -169,7 +178,7 @@ public class BookManagementView extends JFrame {
 		labelList.setFont(new Font("Fira Code", Font.PLAIN, 18));
 
 		textFieldID = new JTextField();
-		textFieldID.setBounds(132, 136, 245, 28);
+		textFieldID.setBounds(132, 136, 240, 28);
 		contentPane.add(textFieldID);
 		textFieldID.setColumns(10);
 
@@ -185,7 +194,7 @@ public class BookManagementView extends JFrame {
 
 		textFieldTitle = new JTextField();
 		textFieldTitle.setColumns(10);
-		textFieldTitle.setBounds(132, 173, 245, 28);
+		textFieldTitle.setBounds(132, 173, 240, 28);
 		contentPane.add(textFieldTitle);
 
 		JLabel labelPrice = new JLabel("Price:");
@@ -195,7 +204,7 @@ public class BookManagementView extends JFrame {
 
 		textFieldPrice = new JTextField();
 		textFieldPrice.setColumns(10);
-		textFieldPrice.setBounds(132, 211, 245, 28);
+		textFieldPrice.setBounds(132, 211, 240, 28);
 		contentPane.add(textFieldPrice);
 
 		JLabel labelAuthor = new JLabel("Author:");
@@ -205,7 +214,7 @@ public class BookManagementView extends JFrame {
 
 		textFieldAuthor = new JTextField();
 		textFieldAuthor.setColumns(10);
-		textFieldAuthor.setBounds(605, 134, 246, 28);
+		textFieldAuthor.setBounds(600, 134, 240, 28);
 		contentPane.add(textFieldAuthor);
 
 		JLabel labelPublisher = new JLabel("Publisher:");
@@ -215,7 +224,7 @@ public class BookManagementView extends JFrame {
 
 		textFieldPublisher = new JTextField();
 		textFieldPublisher.setColumns(10);
-		textFieldPublisher.setBounds(605, 171, 246, 28);
+		textFieldPublisher.setBounds(600, 171, 240, 28);
 		contentPane.add(textFieldPublisher);
 
 		JLabel labelPublicationTime = new JLabel("Publication Time:");
@@ -225,28 +234,28 @@ public class BookManagementView extends JFrame {
 
 		textFieldPublicationTime = new JTextField();
 		textFieldPublicationTime.setColumns(10);
-		textFieldPublicationTime.setBounds(605, 211, 246, 28);
+		textFieldPublicationTime.setBounds(600, 211, 240, 28);
 		contentPane.add(textFieldPublicationTime);
 
                 
                 //Other function <Search by Id>
 		textFieldSearch = new JTextField();
 		textFieldSearch.setColumns(10);
-		textFieldSearch.setBounds(500, 40, 240, 30);
+		textFieldSearch.setBounds(600, 40, 240, 30);
 		contentPane.add(textFieldSearch);
 
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(action);
 		btnSearch.setFont(new Font("Verdana", Font.PLAIN, 17));
 		btnSearch.setBackground(SystemColor.controlHighlight);
-		btnSearch.setBounds(800, 40, 100, 30);
+		btnSearch.setBounds(870, 40, 100, 30);
 		contentPane.add(btnSearch);
 
 		JButton btnClear = new JButton("Clear");
 		btnClear.addActionListener(action);
 		btnClear.setFont(new Font("Verdana", Font.PLAIN, 17));
 		btnClear.setBackground(SystemColor.controlHighlight);
-		btnClear.setBounds(950, 40, 100, 30);
+		btnClear.setBounds(980, 40, 100, 30);
 		contentPane.add(btnClear);
        
                 
@@ -305,13 +314,13 @@ public class BookManagementView extends JFrame {
 				new Object[][] {
 
 				},
-		new String[] {"ID", "Title", "Price (VND)", "Author", "Publisher", "Publication Time"
+		new String[] {"ID", "Title",  "Author", "Publisher", "Price", "Publication Time"
 				}));
 		table.getColumnModel().getColumn(0).setPreferredWidth(38);
-		table.getColumnModel().getColumn(1).setPreferredWidth(132);
-		table.getColumnModel().getColumn(2).setPreferredWidth(39);
+		table.getColumnModel().getColumn(1).setPreferredWidth(132);	
 		table.getColumnModel().getColumn(3).setPreferredWidth(114);
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);
+                table.getColumnModel().getColumn(2).setPreferredWidth(39);
 		table.getColumnModel().getColumn(5).setPreferredWidth(100);
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -347,10 +356,10 @@ public class BookManagementView extends JFrame {
 		}
 		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
 		textFieldID.setText(model_table.getValueAt(i, 0).toString());
-		textFieldTitle.setText(model_table.getValueAt(i, 1).toString());
-		textFieldPrice.setText(model_table.getValueAt(i, 2).toString());
+		textFieldTitle.setText(model_table.getValueAt(i, 1).toString());		
 		textFieldAuthor.setText(model_table.getValueAt(i, 3).toString());
 		textFieldPublisher.setText(model_table.getValueAt(i, 4).toString());
+                textFieldPrice.setText(model_table.getValueAt(i, 2).toString());
 		textFieldPublicationTime.setText(model_table.getValueAt(i, 5).toString());
 	}
 
