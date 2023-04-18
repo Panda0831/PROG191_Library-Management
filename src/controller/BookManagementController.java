@@ -33,8 +33,8 @@ public class BookManagementController implements Action {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String cm = e.getActionCommand();
-		switch (cm) {
+		String acctionCommand = e.getActionCommand();
+		switch (acctionCommand) {
 			case "Insert":
 				//alert();
 				addBook();
@@ -60,7 +60,7 @@ public class BookManagementController implements Action {
 			case "Upload File":
 				importFile();
 				break;
-			case "Save As":
+			case "Save":
 				exportFile();
 				break;
 			case "Exit":
@@ -339,7 +339,9 @@ public class BookManagementController implements Action {
 			}
 		}
 	}
-
+            //Export bao gồm chức năng save và xuất file ra.
+            //Khi đang mở 1 file lên để làm việc thì ấn save sẽ lưu dữ liệu vào file đó.
+            //Trong trường hợp đang kh mở file nào thì Save có chức năng Export file đó ra.
 	public void importFile() {
 		try {
 			JFileChooser fc = new JFileChooser();
@@ -400,22 +402,22 @@ public class BookManagementController implements Action {
 		}
 	}
 
-	public void totalPrice() {
-		try {
-			double total = 0;
-			for (Book book : this.model.getBooks()) {
-				total += book.getPrice();
-			}
-			if (total == 0) {
-				JOptionPane.showMessageDialog(view, "Please import data!");
-				return;
-			} else {
-				JOptionPane.showMessageDialog(view, "Total price: " + total);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public void totalPrice() {
+//		try {
+//			double total = 0;
+//			for (Book book : this.model.getBooks()) {
+//				total += book.getPrice();
+//			}
+//			if (total == 0) {
+//				JOptionPane.showMessageDialog(view, "Please import data!");
+//				return;
+//			} else {
+//				JOptionPane.showMessageDialog(view, "Total price: " + total);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void resetForm() {
 		view.textFieldID.setText("");

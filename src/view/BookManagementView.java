@@ -101,36 +101,14 @@ public class BookManagementView extends JFrame {
 		});
         }
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public BookManagementView() {
 		this.model = new BookManagementModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 730);
 		setTitle("Book Management System by Panda");
 
-//		Action action = new BookManagementController(this);
-//                
-//		JMenuBar menuBar = new JMenuBar();
-//		setJMenuBar(menuBar);
-//                    
-//                    JMenu menuFile = new JMenu("File");
-//                    menuFile.setFont(new Font("Fira Code", Font.PLAIN, 16));
-//                    menuBar.add(menuFile);
-//                    
-//                    JMenuItem menuImport = new JMenuItem("Open file");
-//                    menuImport.addActionListener(action);
-//                    menuImport.setFont(new Font("Fira Code", Font.PLAIN, 16));
-//                    menuFile.add(menuImport);
-//                    
-//                    JMenuItem menuExport = new JMenuItem("Save As");
-//                    menuExport.addActionListener(action);
-//                    menuExport.setFont(new Font("Fira Code", Font.PLAIN, 16));
-//                    menuFile.add(menuExport);
-//
-//                    JSeparator separator = new JSeparator();
-//                    menuFile.add(separator);
+
                 Action action = new BookManagementController(this);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -145,7 +123,7 @@ public class BookManagementView extends JFrame {
 		menuImport.setFont(new Font("Fira Code", Font.PLAIN, 16));
 		menuFile.add(menuImport);
 
-		JMenuItem menuExport = new JMenuItem("Save As");
+		JMenuItem menuExport = new JMenuItem("Save");
 		menuExport.addActionListener(action);
 		menuExport.setFont(new Font("Fira Code", Font.PLAIN, 16));
 		menuFile.add(menuExport);                    
@@ -314,13 +292,13 @@ public class BookManagementView extends JFrame {
 				new Object[][] {
 
 				},
-		new String[] {"ID", "Title",  "Author", "Publisher", "Price", "Publication Time"
-				}));
+		new String[] {"ID", "Title","Price", "Author", "Publisher", "Publication Time"}));
 		table.getColumnModel().getColumn(0).setPreferredWidth(38);
 		table.getColumnModel().getColumn(1).setPreferredWidth(132);	
+                table.getColumnModel().getColumn(2).setPreferredWidth(39);
 		table.getColumnModel().getColumn(3).setPreferredWidth(114);
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);
-                table.getColumnModel().getColumn(2).setPreferredWidth(39);
+               
 		table.getColumnModel().getColumn(5).setPreferredWidth(100);
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -339,13 +317,7 @@ public class BookManagementView extends JFrame {
 		contentPane.add(separator_1);
 		
 		this.setVisible(true);
-                
-////		JButton btnSumOfPrice = new JButton("Total Price");
-////		btnSumOfPrice.addActionListener(action);
-////		btnSumOfPrice.setFont(new Font("Verdana", Font.PLAIN, 17));
-////		btnSumOfPrice.setBackground(SystemColor.controlHighlight);
-////		btnSumOfPrice.setBounds(924, 40, 154, 31);
-////		contentPane.add(btnSumOfPrice);
+               
 	}
 
 	public void tableMouseClicked(java.awt.event.MouseEvent evt) {
@@ -356,10 +328,11 @@ public class BookManagementView extends JFrame {
 		}
 		DefaultTableModel model_table = (DefaultTableModel) table.getModel();
 		textFieldID.setText(model_table.getValueAt(i, 0).toString());
-		textFieldTitle.setText(model_table.getValueAt(i, 1).toString());		
+		textFieldTitle.setText(model_table.getValueAt(i, 1).toString());
+                textFieldPrice.setText(model_table.getValueAt(i, 2).toString());		
 		textFieldAuthor.setText(model_table.getValueAt(i, 3).toString());
 		textFieldPublisher.setText(model_table.getValueAt(i, 4).toString());
-                textFieldPrice.setText(model_table.getValueAt(i, 2).toString());
+                
 		textFieldPublicationTime.setText(model_table.getValueAt(i, 5).toString());
 	}
 
