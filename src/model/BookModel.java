@@ -3,18 +3,18 @@ package model;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class BookManagementModel {
+public class BookModel {
 	private ArrayList<Book> books;
 	private String option;
 	private String fileName;
 
-	public BookManagementModel() {
+	public BookModel() {
 		this.books = new ArrayList<Book>();
 		this.option = "";
 		this.fileName = "";
 	}
 
-	public BookManagementModel(ArrayList<Book> books) {
+	public BookModel(ArrayList<Book> books) {
 		this.books = books;
 	}
 

@@ -18,15 +18,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import model.Book;
-import model.BookManagementModel;
-import view.BookManagementView;
+import model.BookModel;
+import view.BookView;
 
-public class BookManagementController implements Action {
-	public static BookManagementView view;
+public class BookController implements Action {
+	public static BookView view;
 	public TableRowSorter<DefaultTableModel> sorter;
-	public BookManagementModel model;
+	public BookModel model;
 
-	public BookManagementController(BookManagementView view) {
+	public BookController(BookView view) {
 		this.view = view;
 		this.model = view.model;
 	}

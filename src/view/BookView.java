@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import model.BookManagementModel;
+import model.BookModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -33,16 +33,16 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import controller.BookManagementController;
+import controller.BookController;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.SwingConstants;
 
-public class BookManagementView extends JFrame {
+public class BookView extends JFrame {
 
-	public BookManagementModel model;
-	public BookManagementController controller;
+	public BookModel model;
+	public BookController controller;
 	public JPanel contentPane;
 	public JTextField textFieldID;
 	public JTextField textFieldTitle;
@@ -72,20 +72,21 @@ public class BookManagementView extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookManagementView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
          public void run() {
-                    BookManagementView frame = new BookManagementView();
+                    BookView frame = new BookView();
                     try {
 			Image image = ImageIO.read(new File("appicon.png"));
                         frame.setIconImage(image);
@@ -102,14 +103,14 @@ public class BookManagementView extends JFrame {
         }
 
 	
-	public BookManagementView() {
-		this.model = new BookManagementModel();
+	public BookView() {
+		this.model = new BookModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 730);
 		setTitle("Book Management System by Panda");
 
 
-                Action action = new BookManagementController(this);
+                Action action = new BookController(this);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -151,7 +152,7 @@ public class BookManagementView extends JFrame {
 		labelInformation.setFont(new Font("Fira Code", Font.PLAIN, 18));
                 //READ
 		JLabel labelList = new JLabel("List of Book");
-		labelList.setBounds(10, 291, 134, 20);
+		labelList.setBounds(10, 290, 134, 20);
 		contentPane.add(labelList);
 		labelList.setFont(new Font("Fira Code", Font.PLAIN, 18));
 
