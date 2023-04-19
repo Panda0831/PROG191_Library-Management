@@ -186,7 +186,9 @@ public class BookController implements Action {
                         return;
                     }
 		} catch (NumberFormatException e) 
-                {JOptionPane.showMessageDialog(null, "The price must be a number.");}
+                {JOptionPane.showMessageDialog(null, "The price must be a number.");
+                return;}
+                
                 try {
                     if(publisher.isEmpty())
                         throw new Exception();
@@ -229,10 +231,10 @@ public class BookController implements Action {
 	public void update() {
 		try {
                     String ID = view.textFieldID.getText();
-		String title = view.textFieldTitle.getText();
-		String author = view.textFieldAuthor.getText();
-                String publisher = view.textFieldPublisher.getText();
-		Date publicationTime = null;
+                    String title = view.textFieldTitle.getText();
+                    String author = view.textFieldAuthor.getText();
+                    String publisher = view.textFieldPublisher.getText();
+                    Date publicationTime = null;
                                               
                 try{
                     if(ID.isEmpty()){
@@ -271,7 +273,8 @@ public class BookController implements Action {
                         return;
                     }
 		} catch (NumberFormatException e) 
-                {JOptionPane.showMessageDialog(null, "The price must be a number.");}
+                {JOptionPane.showMessageDialog(null, "The price must be a number.");
+                return;}
                 try {
                     if(publisher.isEmpty())
                         throw new Exception();
@@ -302,11 +305,7 @@ public class BookController implements Action {
 				JOptionPane.showMessageDialog(view, "Please select a row to update.");
 				return;
 			} else {
-                            if (model.isExist(book)) {
-                            JOptionPane.showMessageDialog(view, "The book already exists.");
-                            return;
-			} 
-                            else{
+                            
 				Book books = getBookfromTable();
 				model_Table.setValueAt(books.getID(), i, 0);
 				model_Table.setValueAt(books.getTitle(), i, 1);
@@ -316,9 +315,9 @@ public class BookController implements Action {
 				model_Table.setValueAt(books.getPublicationTime(), i, 5);
 				model.updateBook(book, i);
 				JOptionPane.showMessageDialog(view, "Update successfully.");
-			}}
+			}
 		} catch (IllegalArgumentException e) {
-			JOptionPane.showMessageDialog(null, "The publication time must be in the format dd/MM/yyyy.");
+			JOptionPane.showMessageDialog(null, "Add book failed.");
 			return;
 		}
 	}
@@ -387,6 +386,8 @@ public class BookController implements Action {
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			for (Book book : this.model.getBooks()) {
 				oos.writeObject(book);
+                        JOptionPane.showMessageDialog(view, "Save file successfully!");
+                                
 			}
 			oos.close();
 		} catch (Exception e) {
@@ -403,6 +404,8 @@ public class BookController implements Action {
 	public void exportFile() {
 		if (this.model.getFileName().length() > 0) {
 			saveFile(this.model.getFileName());
+                        
+                        return;
 		} else {
 			JFileChooser fc = new JFileChooser();
 			int returnVal = fc.showSaveDialog(view);
