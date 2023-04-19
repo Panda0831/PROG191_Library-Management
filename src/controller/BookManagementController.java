@@ -146,6 +146,7 @@ public class BookManagementController implements Action {
 		String ID = view.textFieldID.getText();
 		String title = view.textFieldTitle.getText();
 		String author = view.textFieldAuthor.getText();
+                String publisher = view.textFieldPublisher.getText();
 		Date publicationTime = null;
                                               
                 try{
@@ -184,10 +185,14 @@ public class BookManagementController implements Action {
                         JOptionPane.showMessageDialog(null, "The price must be greater than 0.");
                         return;
                     }
-		} catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "The price must be a number.");
-			}
-        
+		} catch (NumberFormatException e) 
+                {JOptionPane.showMessageDialog(null, "The price must be a number.");}
+                try {
+                    if(publisher.isEmpty())
+                        throw new Exception();
+                }
+                catch (Exception e) {JOptionPane.showMessageDialog(null, "Publisher is empty"); return;}
+                
 		try {
                     publicationTime = new Date(view.textFieldPublicationTime.getText());
 		} 
@@ -196,10 +201,8 @@ public class BookManagementController implements Action {
                     JOptionPane.showMessageDialog(null, "The publication time must be in the format dd/MM/yyyy.");
                     return;
 		}
-			String publisher = view.textFieldPublisher.getText();
-                        
-		
                 
+             
 		Book book = new Book(ID, title, price, author, publicationTime, publisher);
 		DefaultTableModel model_Table = (DefaultTableModel) view.table.getModel();
 		if (model.isExist(book)) {
@@ -324,6 +327,12 @@ public class BookManagementController implements Action {
 			oos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+//Nó giúp để theo dõi ngoại lệ. 
+////Ví dụ, bạn đang viết một số phương thức trong chương trình của bạn và một trong những phương thức của bạn gây ra lỗi. 
+////Sau đó printstack sẽ giúp bạn xác định phương pháp nào gây ra lỗi. Stack sẽ giúp như thế này:
+////Đầu tiên phương thức chính của bạn sẽ được gọi và chèn vào ngăn xếp, 
+////sau đó phương thức thứ hai sẽ được gọi và chèn vào ngăn xếp theo thứ tự LIFO 
+//và nếu có lỗi xảy ra ở đâu đó bên trong bất kỳ phương thức nào thì ngăn xếp này sẽ giúp xác định phương thức đó.
 		}
 	}
 
