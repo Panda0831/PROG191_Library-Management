@@ -228,6 +228,65 @@ public class BookController implements Action {
 
 	public void update() {
 		try {
+                    String ID = view.textFieldID.getText();
+		String title = view.textFieldTitle.getText();
+		String author = view.textFieldAuthor.getText();
+                String publisher = view.textFieldPublisher.getText();
+		Date publicationTime = null;
+                                              
+                try{
+                    if(ID.isEmpty()){
+                        throw new Exception();}
+                    } 
+                catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, "ID is empty");
+                    return;
+                } 
+                try{
+                    if(title.isEmpty()){
+                        throw new Exception();}
+                    } 
+                catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, "Title is empty");
+                    return;
+                }
+                try{
+                    if(author.isEmpty()){
+                        throw new Exception();}
+                    } 
+                catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, "Author is empty");
+                    return;
+                }
+                float price = 0;
+		try 
+                {
+                    price = Float.parseFloat(view.textFieldPrice.getText());
+                    if (price < 0) 
+                    {
+                        JOptionPane.showMessageDialog(null, "The price must be greater than 0.");
+                        return;
+                    }
+		} catch (NumberFormatException e) 
+                {JOptionPane.showMessageDialog(null, "The price must be a number.");}
+                try {
+                    if(publisher.isEmpty())
+                        throw new Exception();
+                }
+                catch (Exception e) {JOptionPane.showMessageDialog(null, "Publisher is empty"); return;}
+                
+		try {
+                    publicationTime = new Date(view.textFieldPublicationTime.getText());
+		} 
+                catch (IllegalArgumentException e) 
+                {
+                    JOptionPane.showMessageDialog(null, "The publication time must be in the format dd/MM/yyyy.");
+                    return;
+		}
+                        Book book = new Book(ID, title, price, author, publicationTime, publisher);
 			DefaultTableModel model_Table = (DefaultTableModel) view.table.getModel();
 			int i = view.table.getSelectedRow();
 			int[] rows = view.table.getSelectedRows();
@@ -243,16 +302,21 @@ public class BookController implements Action {
 				JOptionPane.showMessageDialog(view, "Please select a row to update.");
 				return;
 			} else {
-				Book book = getBookfromTable();
-				model_Table.setValueAt(book.getID(), i, 0);
-				model_Table.setValueAt(book.getTitle(), i, 1);
-				model_Table.setValueAt(book.getPrice(), i, 2);
-				model_Table.setValueAt(book.getAuthor(), i, 3);
-				model_Table.setValueAt(book.getPublisher(), i, 4);
-				model_Table.setValueAt(book.getPublicationTime(), i, 5);
+                            if (model.isExist(book)) {
+                            JOptionPane.showMessageDialog(view, "The book already exists.");
+                            return;
+			} 
+                            else{
+				Book books = getBookfromTable();
+				model_Table.setValueAt(books.getID(), i, 0);
+				model_Table.setValueAt(books.getTitle(), i, 1);
+				model_Table.setValueAt(books.getPrice(), i, 2);
+				model_Table.setValueAt(books.getAuthor(), i, 3);
+				model_Table.setValueAt(books.getPublisher(), i, 4);
+				model_Table.setValueAt(books.getPublicationTime(), i, 5);
 				model.updateBook(book, i);
 				JOptionPane.showMessageDialog(view, "Update successfully.");
-			}
+			}}
 		} catch (IllegalArgumentException e) {
 			JOptionPane.showMessageDialog(null, "The publication time must be in the format dd/MM/yyyy.");
 			return;
@@ -410,23 +474,6 @@ public class BookController implements Action {
 			}
 		}
 	}
-
-//	public void totalPrice() {
-//		try {
-//			double total = 0;
-//			for (Book book : this.model.getBooks()) {
-//				total += book.getPrice();
-//			}
-//			if (total == 0) {
-//				JOptionPane.showMessageDialog(view, "Please import data!");
-//				return;
-//			} else {
-//				JOptionPane.showMessageDialog(view, "Total price: " + total);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	public void resetForm() {
 		view.textFieldID.setText("");

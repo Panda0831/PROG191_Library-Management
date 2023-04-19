@@ -85,25 +85,6 @@ public class Book implements Serializable {
 		return "Book [ID=" + ID + ", title=" + title + ", price=" + price + ", author=" + author + ", publicationTime="
 				+ publicationTime + ", publisher=" + publisher + "]\n";
 	}
-//
-//	@Override
-//	public int hashCode() {
-//		return Objects.hash(ID, author, price, publicationTime, publisher, title);
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Book other = (Book) obj;
-//		return Objects.equals(ID, other.ID) && Objects.equals(author, other.author)
-//				&& Float.floatToIntBits(price) == Float.floatToIntBits(other.price)
-//				&& Objects.equals(publicationTime, other.publicationTime) && Objects.equals(publisher, other.publisher)
-//				&& Objects.equals(title, other.title);
-//	}
+
 
 }
